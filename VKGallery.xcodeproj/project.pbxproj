@@ -33,6 +33,8 @@
 		1EF12D4929F2DFED007F8C5B /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF12D4829F2DFED007F8C5B /* ImageView.swift */; };
 		1EF12D4C29F3DA89007F8C5B /* DetailPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF12D4B29F3DA89007F8C5B /* DetailPhotoModel.swift */; };
 		1EF12D4E29F3E141007F8C5B /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF12D4D29F3E141007F8C5B /* CalendarManager.swift */; };
+		1EF12D5029F40467007F8C5B /* ImageSavePhotosAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF12D4F29F40467007F8C5B /* ImageSavePhotosAlbum.swift */; };
+		1EF12D5329F406E6007F8C5B /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF12D5229F406E6007F8C5B /* Alerts.swift */; };
 		62C4B4A12BE6F2434BB8C2B4 /* Pods_VKGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1542082FC782917DDC98C7D6 /* Pods_VKGallery.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		1EF12D4829F2DFED007F8C5B /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		1EF12D4B29F3DA89007F8C5B /* DetailPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoModel.swift; sourceTree = "<group>"; };
 		1EF12D4D29F3E141007F8C5B /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		1EF12D4F29F40467007F8C5B /* ImageSavePhotosAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSavePhotosAlbum.swift; sourceTree = "<group>"; };
+		1EF12D5229F406E6007F8C5B /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		A0E96A75EFCFE281B5B66A2E /* Pods-VKGallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKGallery.debug.xcconfig"; path = "Target Support Files/Pods-VKGallery/Pods-VKGallery.debug.xcconfig"; sourceTree = "<group>"; };
 		DBFF1B7F703047FBEE213836 /* Pods-VKGallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKGallery.release.xcconfig"; path = "Target Support Files/Pods-VKGallery/Pods-VKGallery.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +99,7 @@
 		1E01C10329F162D300ACA4B7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1EF12D5129F406D8007F8C5B /* Alerts */,
 				1EF12D4729F2DFE2007F8C5B /* Extensions */,
 				1E01C12129F1706F00ACA4B7 /* AppRouter */,
 				1E01C10D29F1662900ACA4B7 /* Variables */,
@@ -258,8 +263,17 @@
 			isa = PBXGroup;
 			children = (
 				1EF12D4B29F3DA89007F8C5B /* DetailPhotoModel.swift */,
+				1EF12D4F29F40467007F8C5B /* ImageSavePhotosAlbum.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1EF12D5129F406D8007F8C5B /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				1EF12D5229F406E6007F8C5B /* Alerts.swift */,
+			);
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 		77B53A37A300CDDE75B02944 /* Frameworks */ = {
@@ -405,12 +419,14 @@
 				1EF12D4629F2DBF4007F8C5B /* PhotoModel.swift in Sources */,
 				1E01C12E29F1753E00ACA4B7 /* DetailPresenter.swift in Sources */,
 				1EF12D4429F2C7E3007F8C5B /* AlbumResponseModel.swift in Sources */,
+				1EF12D5329F406E6007F8C5B /* Alerts.swift in Sources */,
 				1E01C12029F16F5A00ACA4B7 /* ModuleBuilder.swift in Sources */,
 				1E01C13129F17B1800ACA4B7 /* MainCollectionViewCell.swift in Sources */,
 				1E01C11B29F16E7100ACA4B7 /* MainViewController.swift in Sources */,
 				1E01C12729F1723900ACA4B7 /* JSONDecoderManager.swift in Sources */,
 				1E01C12329F1707800ACA4B7 /* AppRouter.swift in Sources */,
 				1EF12D4C29F3DA89007F8C5B /* DetailPhotoModel.swift in Sources */,
+				1EF12D5029F40467007F8C5B /* ImageSavePhotosAlbum.swift in Sources */,
 				1E01C13429F183D200ACA4B7 /* DetailCollectionViewCell.swift in Sources */,
 				1E430EAB29F14C80005E276C /* AppDelegate.swift in Sources */,
 				1E01C11D29F16E7800ACA4B7 /* MainPresenter.swift in Sources */,

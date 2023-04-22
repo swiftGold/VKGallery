@@ -11,6 +11,8 @@ import UIKit
 protocol DetailViewControllerProtocol: AnyObject {
     func setupImageView(with model: DetailPhotoViewModel)
     func setupCollectionView(with models: [DetailPhotoViewModel])
+    func imageSuccessSaved(with alert: UIAlertController)
+    func imageFailureSaved(with alert: UIAlertController)
 }
 
 class DetailViewController: UIViewController {
@@ -55,10 +57,12 @@ class DetailViewController: UIViewController {
     }
     
     // MARK: - Objc methods
-        @objc
-        private func didTapBarButton() {
-            print(#function)
-        }
+    @objc
+    private func didTapBarButton() {
+        print(#function)
+        let image = imageView.image
+        presenter?.didTapShareButton(with: image)
+    }
 }
 
 // MARK: - UICollectionViewDelegate impl
@@ -93,6 +97,14 @@ extension DetailViewController: DetailViewControllerProtocol {
         imageView.enableZoom()
         imageView.downloaded(from: model.url)
         title = model.date
+    }
+    
+    func imageSuccessSaved(with alert: UIAlertController) {
+        present(alert, animated: true)
+    }
+    
+    func imageFailureSaved(with alert: UIAlertController) {
+        present(alert, animated: true)
     }
 }
 
