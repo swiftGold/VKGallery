@@ -24,8 +24,8 @@ final class DetailCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell() {
-        imageView.image = UIImage(named: "forTime")
+    func configureCell(with model: DetailPhotoViewModel) {
+        imageView.downloaded(from: model.url)
     }
 }
 

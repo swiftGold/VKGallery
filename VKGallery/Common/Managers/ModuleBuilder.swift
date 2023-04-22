@@ -8,7 +8,7 @@
 protocol ModuleBuilderProtocol {
     func buildAuthViewController() -> AuthViewController
     func buildMainViewController() -> MainViewController
-    func buildDetailViewController() -> DetailViewController
+    func buildDetailViewController(model: DetailPhotoViewModel, models: [DetailPhotoViewModel]) -> DetailViewController
 }
 
 final class ModuleBuilder {
@@ -37,21 +37,31 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     
     func buildMainViewController() -> MainViewController {
         let viewController = MainViewController()
+        let calendarManager = CalendarManager()
         let jsonService = JSONDecoderManager()
         let networkManager = NetworkManager(jsonService: jsonService)
         let apiService = APIService(networkManager: networkManager)
         let presenter = MainPresenter(router: router,
                                       moduleBuilder: self,
-                                      apiService: apiService
+                                      apiService: apiService,
+                                      calendarManager: calendarManager
         )
         viewController.presenter = presenter
         presenter.viewController = viewController
         return viewController
     }
     
-    func buildDetailViewController() -> DetailViewController {
+    func buildDetailViewController(model: DetailPhotoViewModel, models: [DetailPhotoViewModel]) -> DetailViewController {
         let viewController = DetailViewController()
-        let presenter = DetailPresenter()
+        let calendarManager = CalendarManager()
+        let jsonService = JSONDecoderManager()
+        let networkManager = NetworkManager(jsonService: jsonService)
+        let apiService = APIService(networkManager: networkManager)
+        let presenter = DetailPresenter(apiService: apiService,
+                                        photoModel: model,
+                                        photoModels: models,
+                                        calendarManager: calendarManager
+        )
         viewController.presenter = presenter
         presenter.viewController = viewController
         return viewController

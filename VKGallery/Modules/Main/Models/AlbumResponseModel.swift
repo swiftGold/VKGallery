@@ -14,7 +14,7 @@ struct ResponseDetails: Decodable {
 }
 
 struct PhotoModel: Decodable {
-    let date: Int
+    let date: Double
     let id: Int
     let sizes: [SizeDetails]
 }

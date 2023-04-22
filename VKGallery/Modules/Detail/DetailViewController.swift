@@ -9,7 +9,8 @@ import UIKit
 
 // MARK: - DetailViewControllerProtocol
 protocol DetailViewControllerProtocol: AnyObject {
-    
+    func setupImageView(with model: DetailPhotoViewModel)
+    func setupCollectionView(with models: [DetailPhotoViewModel])
 }
 
 class DetailViewController: UIViewController {
@@ -44,6 +45,7 @@ class DetailViewController: UIViewController {
     
     // MARK: - Variables
     var presenter: DetailPresenterProtocol?
+    private var viewModels: [DetailPhotoViewModel] = []
     
     // MARK: - life cycles
     override func viewDidLoad() {
@@ -55,13 +57,6 @@ class DetailViewController: UIViewController {
     // MARK: - Objc methods
         @objc
         private func didTapBarButton() {
-    //        do {
-    //            try Auth.auth().signOut()
-    //            let viewController = WelcomeViewController()
-    //            navigationController?.pushViewController(viewController, animated: true)
-    //        } catch let signOutError as NSError {
-    //            print("Error signing out: %@", signOutError)
-    //        }
             print(#function)
         }
 }
@@ -76,26 +71,33 @@ extension DetailViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource impl
 extension DetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        30
+        viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailCollectionViewCell", for: indexPath) as? DetailCollectionViewCell else { fatalError("")
         }
-        cell.configureCell()
+        cell.configureCell(with: viewModels[indexPath.item])
         return cell
     }
 }
 
 // MARK: - DetailViewControllerProtocol impl
 extension DetailViewController: DetailViewControllerProtocol {
+    func setupCollectionView(with models: [DetailPhotoViewModel]) {
+        viewModels = models
+        collectionView.reloadData()
+    }
     
+    func setupImageView(with model: DetailPhotoViewModel) {
+        imageView.downloaded(from: model.url)
+        title = model.date
+    }
 }
 
 // MARK: - private methods
 private extension DetailViewController {
     func setupNavBar() {
-        title = "Дата загрузки"
         navigationItem.rightBarButtonItem = barButtonItem
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]

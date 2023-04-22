@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import VK_ios_sdk
 
 // MARK: - MainViewControllerProtocol
 protocol MainViewControllerProtocol: AnyObject {
@@ -15,7 +14,11 @@ protocol MainViewControllerProtocol: AnyObject {
 
 class MainViewController: UIViewController {
 // MARK: - UI
-    private lazy var barButtonItem = UIBarButtonItem(title: "Выход", style: .plain, target: self, action: #selector(didTapBarButton))
+    private lazy var barButtonItem = UIBarButtonItem(title: "Выход",
+                                                     style: .plain,
+                                                     target: self,
+                                                     action: #selector(didTapBarButton)
+    )
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

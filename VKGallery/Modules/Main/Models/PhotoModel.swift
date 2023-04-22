@@ -7,5 +7,6 @@
 
 struct PhotoViewModel {
     let id: Int
+    let date: Double
     let url: String
 }
