@@ -90,6 +90,7 @@ extension DetailViewController: DetailViewControllerProtocol {
     }
     
     func setupImageView(with model: DetailPhotoViewModel) {
+        imageView.enableZoom()
         imageView.downloaded(from: model.url)
         title = model.date
     }
