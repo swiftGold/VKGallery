@@ -37,7 +37,13 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     
     func buildMainViewController() -> MainViewController {
         let viewController = MainViewController()
-        let presenter = MainPresenter(router: router, moduleBuilder: self)
+        let jsonService = JSONDecoderManager()
+        let networkManager = NetworkManager(jsonService: jsonService)
+        let apiService = APIService(networkManager: networkManager)
+        let presenter = MainPresenter(router: router,
+                                      moduleBuilder: self,
+                                      apiService: apiService
+        )
         viewController.presenter = presenter
         presenter.viewController = viewController
         return viewController
