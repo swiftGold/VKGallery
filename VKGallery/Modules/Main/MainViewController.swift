@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import VK_ios_sdk
 
 // MARK: - MainViewControllerProtocol
 protocol MainViewControllerProtocol: AnyObject {
-    
+    func setupViewController(with model: [PhotoViewModel])
 }
 
 class MainViewController: UIViewController {
@@ -20,7 +21,7 @@ class MainViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         //TODO: - подсчитать размеры под все экраны
-        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 40) / 2 , height: (UIScreen.main.bounds.height - 30) / 4)
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 40) / 2 , height: 214)
         layout.minimumLineSpacing = 2
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .vertical
@@ -37,6 +38,7 @@ class MainViewController: UIViewController {
     
 // MARK: - Variables
     var presenter: MainPresenterProtocol?
+    private var viewModels: [PhotoViewModel] = []
 
 // MARK: - life cycles
     override func viewDidLoad() {
@@ -48,14 +50,7 @@ class MainViewController: UIViewController {
 // MARK: - Objc methods
     @objc
     private func didTapBarButton() {
-//        do {
-//            try Auth.auth().signOut()
-//            let viewController = WelcomeViewController()
-//            navigationController?.pushViewController(viewController, animated: true)
-//        } catch let signOutError as NSError {
-//            print("Error signing out: %@", signOutError)
-//        }
-        print(#function)
+        presenter?.didTapLogOutButton()
     }
 }
 
@@ -69,20 +64,23 @@ extension MainViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource impl
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        12
+        viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as? MainCollectionViewCell else { fatalError("")
         }
-        cell.configureCell()
+        cell.configureCell(with: viewModels[indexPath.row])
         return cell
     }
 }
 
 // MARK: - MainViewControllerProtocol impl
 extension MainViewController: MainViewControllerProtocol {
-    
+    func setupViewController(with model: [PhotoViewModel]) {
+        viewModels = model
+        collectionView.reloadData()
+    }
 }
 
 // MARK: - private methods

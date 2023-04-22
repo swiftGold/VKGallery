@@ -5,6 +5,8 @@
 //  Created by Сергей Золотухин on 20.04.2023.
 //
 
+import UIKit
+
 protocol AuthPresenterProtocol {
     func viewDidLoad()
     func didTapVkButton()
@@ -15,6 +17,7 @@ final class AuthPresenter {
     
     private let router: Router
     private let moduleBuilder: ModuleBuilderProtocol
+    private var authService = SceneDelegate.shared().authService
     
     init(
         router: Router,
@@ -31,7 +34,6 @@ extension AuthPresenter: AuthPresenterProtocol {
     }
     
     func didTapVkButton() {
-        let mainViewController = moduleBuilder.buildMainViewController()
-        router.push(mainViewController, animated: true)
+        authService?.wakeUpSession()
     }
 }
