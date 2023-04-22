@@ -41,8 +41,12 @@ final class DetailPresenter {
 // MARK: - DetailPresenterProtocol impl
 extension DetailPresenter: DetailPresenterProtocol {
     func viewDidLoad() {
-        viewController?.setupImageView(with: photoModel)
-        viewController?.setupCollectionView(with: photoModels)
+        viewController?.showPlaceholders()
+        //Only for placeholder show :)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            self.viewController?.setupImageView(with: self.photoModel)
+            self.viewController?.setupCollectionView(with: self.photoModels)
+        }
     }
     
     func didTapCell(at index: Int) {

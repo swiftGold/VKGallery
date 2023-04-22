@@ -25,8 +25,11 @@ final class MainCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(with model: PhotoViewModel) {
-        let imageUrl = model.url
-        imageView.downloaded(from: imageUrl)
+        imageView.loadImage(from: model.url)
+    }
+    
+    func configurePlaceholder() {
+        imageView.image = UIImage(named: "placeHolder")
     }
 }
 

@@ -46,7 +46,11 @@ extension MainPresenter: MainPresenterProtocol {
     }
     
     func viewDidLoad() {
-        fetchPhotos()
+        viewController?.showPlaceholders()
+        //Only for placeholder show :)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.fetchPhotos()
+        }
     }
     
     func didTapCell(at index: Int) {
