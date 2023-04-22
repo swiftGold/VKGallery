@@ -10,6 +10,7 @@ import UIKit
 // MARK: - MainViewControllerProtocol
 protocol MainViewControllerProtocol: AnyObject {
     func setupViewController(with model: [PhotoViewModel])
+    func showPlaceholders()
 }
 
 class MainViewController: UIViewController {
@@ -42,6 +43,7 @@ class MainViewController: UIViewController {
 // MARK: - Variables
     var presenter: MainPresenterProtocol?
     private var viewModels: [PhotoViewModel] = []
+    private var isPlaceholder = false
 
 // MARK: - life cycles
     override func viewDidLoad() {
@@ -67,13 +69,18 @@ extension MainViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource impl
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModels.count
+        return isPlaceholder ? 12 : viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as? MainCollectionViewCell else { fatalError("")
         }
-        cell.configureCell(with: viewModels[indexPath.row])
+        if isPlaceholder {
+            cell.configurePlaceholder()
+        } else {
+            let viewModel = viewModels[indexPath.row]
+            cell.configureCell(with: viewModel)
+        }
         return cell
     }
 }
@@ -81,7 +88,13 @@ extension MainViewController: UICollectionViewDataSource {
 // MARK: - MainViewControllerProtocol impl
 extension MainViewController: MainViewControllerProtocol {
     func setupViewController(with model: [PhotoViewModel]) {
+        isPlaceholder = false
         viewModels = model
+        collectionView.reloadData()
+    }
+    
+    func showPlaceholders() {
+        isPlaceholder = true
         collectionView.reloadData()
     }
 }

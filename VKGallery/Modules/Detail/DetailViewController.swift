@@ -13,6 +13,7 @@ protocol DetailViewControllerProtocol: AnyObject {
     func setupCollectionView(with models: [DetailPhotoViewModel])
     func imageSuccessSaved(with alert: UIAlertController)
     func imageFailureSaved(with alert: UIAlertController)
+    func showPlaceholders()
 }
 
 class DetailViewController: UIViewController {
@@ -21,7 +22,7 @@ class DetailViewController: UIViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "forTime")
+        imageView.image = UIImage(named: "singlePlaceholder")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -48,6 +49,7 @@ class DetailViewController: UIViewController {
     // MARK: - Variables
     var presenter: DetailPresenterProtocol?
     private var viewModels: [DetailPhotoViewModel] = []
+    private var isPlaceholder = false
     
     // MARK: - life cycles
     override func viewDidLoad() {
@@ -75,13 +77,19 @@ extension DetailViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource impl
 extension DetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModels.count
+        return isPlaceholder ? 20 : viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailCollectionViewCell", for: indexPath) as? DetailCollectionViewCell else { fatalError("")
         }
-        cell.configureCell(with: viewModels[indexPath.item])
+        if isPlaceholder {
+            cell.configurePlaceholder()
+        } else {
+            let viewModel = viewModels[indexPath.row]
+            cell.configureCell(with: viewModel)
+        }
+//        cell.configureCell(with: viewModels[indexPath.item])
         return cell
     }
 }
@@ -89,13 +97,14 @@ extension DetailViewController: UICollectionViewDataSource {
 // MARK: - DetailViewControllerProtocol impl
 extension DetailViewController: DetailViewControllerProtocol {
     func setupCollectionView(with models: [DetailPhotoViewModel]) {
+        isPlaceholder = false
         viewModels = models
         collectionView.reloadData()
     }
     
     func setupImageView(with model: DetailPhotoViewModel) {
         imageView.enableZoom()
-        imageView.downloaded(from: model.url)
+        imageView.loadImage(from: model.url)
         title = model.date
     }
     
@@ -105,6 +114,11 @@ extension DetailViewController: DetailViewControllerProtocol {
     
     func imageFailureSaved(with alert: UIAlertController) {
         present(alert, animated: true)
+    }
+    
+    func showPlaceholders() {
+        isPlaceholder = true
+        collectionView.reloadData()
     }
 }
 

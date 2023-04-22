@@ -25,7 +25,11 @@ final class DetailCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(with model: DetailPhotoViewModel) {
-        imageView.downloaded(from: model.url)
+        imageView.loadImage(from: model.url)
+    }
+    
+    func configurePlaceholder() {
+        imageView.image = UIImage(named: "placeHolder")
     }
 }
 
