@@ -18,6 +18,7 @@ class AuthViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont(name: Fonts.SFBold, size: 44)
         label.text = "Mobile Up Gallery"
+        label.textColor = UIColor(named: Colors.black)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         return label
@@ -27,9 +28,9 @@ class AuthViewController: UIViewController {
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(didTapVkButton), for: .touchUpInside)
         button.setTitle("button.login".localized, for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(UIColor(named: Colors.white), for: .normal)
         button.titleLabel?.font = UIFont(name: Fonts.SFRegular, size: 15)
-        button.backgroundColor = .black
+        button.backgroundColor = UIColor(named: Colors.black)
         button.layer.cornerRadius = 12
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -59,7 +60,7 @@ extension AuthViewController: AuthViewControllerProtocol {
 // MARK: - private methods
 private extension AuthViewController {
     func setupViewController() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: Colors.white)
         
         addSubviews()
         setConstraints()
