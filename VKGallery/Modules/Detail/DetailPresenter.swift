@@ -57,10 +57,16 @@ extension DetailPresenter: DetailPresenterProtocol {
     func didTapShareButton(with image: UIImage?) {
         if let image = image {
             imageSave.writeToPhotoAlbum(image: image)
-            let alert = alert.showAlertWith(title: "Saved!", message: "Your image has been saved to your photos.")
+            let alert = alert.showAlertWith(
+                title: "alert.success.savepicture.title".localized,
+                message: "alert.success.savepicture.message".localized
+            )
             viewController?.imageSuccessSaved(with: alert)
         } else {
-            let alert = alert.showAlertWith(title: "Save error", message: "Your image has been not saved to your photos.")
+            let alert = alert.showAlertWith(
+                title: "alert.failure.savepicture.title".localized,
+                message: "alert.failure.savepicture.message".localized
+            )
             viewController?.imageFailureSaved(with: alert)
         }
     }

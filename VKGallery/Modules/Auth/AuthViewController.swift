@@ -26,7 +26,7 @@ class AuthViewController: UIViewController {
     private lazy var vkButton: UIButton = {
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(didTapVkButton), for: .touchUpInside)
-        button.setTitle("Вход через VK", for: .normal)
+        button.setTitle("button.login".localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: Fonts.SFRegular, size: 15)
         button.backgroundColor = .black
