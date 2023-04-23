@@ -126,12 +126,12 @@ extension DetailViewController: DetailViewControllerProtocol {
 private extension DetailViewController {
     func setupNavBar() {
         navigationItem.rightBarButtonItem = barButtonItem
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.tintColor = UIColor(named: Colors.black)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Colors.black) ?? .black]
     }
     
     func setupViewController() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: Colors.white)
         addSubviews()
         setConstraints()
         presenter?.viewDidLoad()

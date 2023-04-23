@@ -105,12 +105,13 @@ private extension MainViewController {
         title = "MobileUp Gallery"
         navigationItem.rightBarButtonItem = barButtonItem
         navigationItem.hidesBackButton = true
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.tintColor = UIColor(named: Colors.black)
+        //TODO: - 
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Colors.black) ?? .black]
     }
     
     func setupViewController() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: Colors.white)
         addSubviews()
         setConstraints()
         presenter?.viewDidLoad()
