@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - DetailViewControllerProtocol
-protocol DetailViewControllerProtocol: AnyObject {
+protocol DetailViewControllerProtocol: UIViewController {
     func setupImageView(with model: DetailPhotoViewModel)
     func setupCollectionView(with models: [DetailPhotoViewModel])
     func imageSuccessSaved(with alert: UIAlertController)
@@ -29,20 +29,24 @@ class DetailViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero,
+                                              collectionViewLayout: layout
+        )
         //TODO: - подсчитать размеры под все экраны
         layout.itemSize = CGSize(width: 54 , height: 54)
         layout.minimumLineSpacing = 2
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.bounces = false
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(DetailCollectionViewCell.self, forCellWithReuseIdentifier: "DetailCollectionViewCell")
+        collectionView.register(DetailCollectionViewCell.self,
+                                forCellWithReuseIdentifier: "DetailCollectionViewCell"
+        )
         return collectionView
     }()
     
@@ -61,7 +65,6 @@ class DetailViewController: UIViewController {
     // MARK: - Objc methods
     @objc
     private func didTapBarButton() {
-        print(#function)
         let image = imageView.image
         presenter?.didTapShareButton(with: image)
     }
@@ -89,7 +92,6 @@ extension DetailViewController: UICollectionViewDataSource {
             let viewModel = viewModels[indexPath.row]
             cell.configureCell(with: viewModel)
         }
-//        cell.configureCell(with: viewModels[indexPath.item])
         return cell
     }
 }
@@ -128,6 +130,8 @@ private extension DetailViewController {
         navigationItem.rightBarButtonItem = barButtonItem
         navigationController?.navigationBar.tintColor = UIColor(named: Colors.black)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Colors.black) ?? .black]
+        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: Fonts.SFBold, size: 17)!]
     }
     
     func setupViewController() {
@@ -144,7 +148,8 @@ private extension DetailViewController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 130),
+//            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: (UIScreen.main.bounds.height - 60 - imageView.heightAnchor / 2) / 2),
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 135),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 375),

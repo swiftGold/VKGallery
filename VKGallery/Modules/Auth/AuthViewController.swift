@@ -44,6 +44,11 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
         setupViewController()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
         
 // MARK: - objc methods
     @objc
@@ -74,7 +79,7 @@ private extension AuthViewController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 160),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIScreen.main.bounds.height / 5),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             

@@ -22,19 +22,19 @@ final class DetailPresenter {
     private var photoModels: [DetailPhotoViewModel]
     private var calendarManager: CalendarManagerProtocol
     private let imageSave = ImageSavePhotosAlbum()
-    private var alert: AlertsProtocol
+    private var alertManager: AlertManagerProtocol
     
     init(apiService: APIServiceProtocol,
          photoModel: DetailPhotoViewModel,
          photoModels: [DetailPhotoViewModel],
          calendarManager: CalendarManagerProtocol,
-         alert: AlertsProtocol
+         alertManager: AlertManagerProtocol
     ) {
         self.apiService = apiService
         self.photoModel = photoModel
         self.photoModels = photoModels
         self.calendarManager = calendarManager
-        self.alert = alert
+        self.alertManager = alertManager
     }
 }
 
@@ -42,11 +42,8 @@ final class DetailPresenter {
 extension DetailPresenter: DetailPresenterProtocol {
     func viewDidLoad() {
         viewController?.showPlaceholders()
-        //Only for placeholder show :)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            self.viewController?.setupImageView(with: self.photoModel)
-            self.viewController?.setupCollectionView(with: self.photoModels)
-        }
+        viewController?.setupImageView(with: photoModel)
+        viewController?.setupCollectionView(with: photoModels)
     }
     
     func didTapCell(at index: Int) {
@@ -56,18 +53,24 @@ extension DetailPresenter: DetailPresenterProtocol {
     
     func didTapShareButton(with image: UIImage?) {
         if let image = image {
-            imageSave.writeToPhotoAlbum(image: image)
-            let alert = alert.showAlertWith(
-                title: "alert.success.savepicture.title".localized,
-                message: "alert.success.savepicture.message".localized
+            let shareViewController = UIActivityViewController(
+                activityItems: [image],
+                applicationActivities: nil
             )
-            viewController?.imageSuccessSaved(with: alert)
+            shareViewController.completionWithItemsHandler = { _, bool, _, _ in
+                if bool {
+                    self.alertManager.showAlertWithVC(title: "alert.success.savepicture.title".localized,
+                                                      message: "alert.success.savepicture.message".localized,
+                                                      vc: self.viewController
+                    )
+                }
+            }
+            viewController?.present(shareViewController, animated: true, completion: nil)
         } else {
-            let alert = alert.showAlertWith(
-                title: "alert.failure.savepicture.title".localized,
-                message: "alert.failure.savepicture.message".localized
+            alertManager.showAlertWithVC(title: "alert.failure.savepicture.title".localized,
+                                         message: "alert.failure.savepicture.message".localized,
+                                         vc: viewController
             )
-            viewController?.imageFailureSaved(with: alert)
         }
     }
 }

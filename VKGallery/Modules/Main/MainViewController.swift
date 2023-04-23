@@ -8,14 +8,14 @@
 import UIKit
 
 // MARK: - MainViewControllerProtocol
-protocol MainViewControllerProtocol: AnyObject {
+protocol MainViewControllerProtocol: UIViewController {
     func setupViewController(with model: [PhotoViewModel])
     func showPlaceholders()
 }
 
 class MainViewController: UIViewController {
 // MARK: - UI
-    private lazy var barButtonItem = UIBarButtonItem(title: "Выход",
+    private lazy var barButtonItem = UIBarButtonItem(title: "navbar.button.exit".localized,
                                                      style: .plain,
                                                      target: self,
                                                      action: #selector(didTapBarButton)
@@ -23,20 +23,26 @@ class MainViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero,
+                                              collectionViewLayout: layout
+        )
         //TODO: - подсчитать размеры под все экраны
-        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 40) / 2 , height: 214)
-        layout.minimumLineSpacing = 2
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 4) / 2 ,
+                                 height: 214
+        )
+        layout.minimumLineSpacing = 3
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 1, bottom: 8, right: 1)
         collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.bounces = false
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsVerticalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: "MainCollectionViewCell")
+        collectionView.register(MainCollectionViewCell.self,
+                                forCellWithReuseIdentifier: "MainCollectionViewCell"
+        )
         return collectionView
     }()
     
@@ -106,8 +112,8 @@ private extension MainViewController {
         navigationItem.rightBarButtonItem = barButtonItem
         navigationItem.hidesBackButton = true
         navigationController?.navigationBar.tintColor = UIColor(named: Colors.black)
-        //TODO: - 
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Colors.black) ?? .black]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: Fonts.SFBold, size: 17)!]
     }
     
     func setupViewController() {

@@ -11,3 +11,10 @@
 "alert.success.savepicture.message" = "Ваша картинка сохранена в ваши фотографии.";
 "alert.failure.savepicture.title" = "Ошибка сохранения";
 "alert.failure.savepicture.message" = "Ваша картинка не может быть сохранена в ваши фотографии.";
+"navbar.button.exit" = "Выход";
+"alert.failure.decoding.title" = "Ошибка декодирования";
+"alert.failure.decoding.message" = "Не получилось декодировать данные";
+"alert.failure.networking.title" = "Ошибка сети";
+"alert.failure.networking.message" = "Проверьте правильность url адреса";
+"alert.failure.unknown.title" = "Упссс!";
+"alert.failure.unknown.message" = "Что-то пошло не так";

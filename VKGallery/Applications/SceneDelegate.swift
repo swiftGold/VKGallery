@@ -40,7 +40,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
     
     func authServiceShouldShow(_ viewController: UIViewController) {
         print(#function)
-        
         window?.rootViewController?.present(viewController, animated: true)
     }
     

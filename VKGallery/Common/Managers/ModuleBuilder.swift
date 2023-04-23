@@ -37,6 +37,7 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     
     func buildMainViewController() -> MainViewController {
         let viewController = MainViewController()
+        let alertManager = AlertManager()
         let calendarManager = CalendarManager()
         let jsonService = JSONDecoderManager()
         let networkManager = NetworkManager(jsonService: jsonService)
@@ -44,7 +45,8 @@ extension ModuleBuilder: ModuleBuilderProtocol {
         let presenter = MainPresenter(router: router,
                                       moduleBuilder: self,
                                       apiService: apiService,
-                                      calendarManager: calendarManager
+                                      calendarManager: calendarManager,
+                                      alertManager: alertManager
         )
         viewController.presenter = presenter
         presenter.viewController = viewController
@@ -53,7 +55,7 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     
     func buildDetailViewController(model: DetailPhotoViewModel, models: [DetailPhotoViewModel]) -> DetailViewController {
         let viewController = DetailViewController()
-        let alert = Alerts()
+        let alertManager = AlertManager()
         let calendarManager = CalendarManager()
         let jsonService = JSONDecoderManager()
         let networkManager = NetworkManager(jsonService: jsonService)
@@ -62,7 +64,7 @@ extension ModuleBuilder: ModuleBuilderProtocol {
                                         photoModel: model,
                                         photoModels: models,
                                         calendarManager: calendarManager,
-                                        alert: alert
+                                        alertManager: alertManager
         )
         viewController.presenter = presenter
         presenter.viewController = viewController
