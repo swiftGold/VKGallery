@@ -23,17 +23,20 @@ final class MainPresenter {
     private let router: Router
     private let moduleBuilder: ModuleBuilderProtocol
     private let apiService: APIServiceProtocol
+    private let alertManager: AlertManagerProtocol
     
     init(
         router: Router,
         moduleBuilder: ModuleBuilderProtocol,
         apiService: APIServiceProtocol,
-        calendarManager: CalendarManagerProtocol
+        calendarManager: CalendarManagerProtocol,
+        alertManager: AlertManagerProtocol
     ) {
         self.router = router
         self.moduleBuilder = moduleBuilder
         self.apiService = apiService
         self.calendarManager = calendarManager
+        self.alertManager = alertManager
     }
 }
 
@@ -47,19 +50,18 @@ extension MainPresenter: MainPresenterProtocol {
     
     func viewDidLoad() {
         viewController?.showPlaceholders()
-        //Only for placeholder show :)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.fetchPhotos()
-        }
+        fetchPhotos()
     }
     
     func didTapCell(at index: Int) {
         mapPhotosArray()
-        let model = detailViewsModels[index]
-        let detailViewController = moduleBuilder.buildDetailViewController(model: model,
-                                                                           models: detailViewsModels
-        )
-        router.push(detailViewController, animated: true)
+        if !detailViewsModels.isEmpty {
+            let model = detailViewsModels[index]
+            let detailViewController = moduleBuilder.buildDetailViewController(model: model,
+                                                                               models: detailViewsModels
+            )
+            router.push(detailViewController, animated: true)
+        }
     }
 }
 
@@ -88,7 +90,19 @@ private extension MainPresenter {
                 }
             } catch {
                 await MainActor.run {
-                    print(error, error.localizedDescription)
+                    guard let appError = error as? AppError else {
+                        alertManager.showAlertWithVC(
+                            title: AppError.unknown.title,
+                            message: AppError.unknown.message,
+                            vc: viewController
+                        )
+                        return
+                    }
+                    alertManager.showAlertWithVC(
+                        title: appError.title,
+                        message: appError.message,
+                        vc: viewController
+                    )
                 }
             }
         }

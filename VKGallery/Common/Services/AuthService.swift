@@ -29,8 +29,7 @@ final class AuthService: NSObject {
 
 extension AuthService {
     func wakeUpSession() {
-//        let scope = ["friends", "photos", "video", "status", "wall", "offline", "groups", "stats", "email"]
-        let scope = ["offline"]
+        let scope = ["friends", "photos", "video", "status", "wall", "offline", "groups", "stats", "email"]
 
         VKSdk.wakeUpSession(scope) { [delegate] state, error in
             switch state {

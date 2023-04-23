@@ -11,3 +11,10 @@
 "alert.success.savepicture.message" = "Your image has been saved to your photos.";
 "alert.failure.savepicture.title" = "Save error";
 "alert.failure.savepicture.message" = "Your image couldn't not be saved to your photos.";
+"navbar.button.exit" = "Exit";
+"alert.failure.decoding.title" = "Decoding error";
+"alert.failure.decoding.message" = "Can't decode data";
+"alert.failure.networking.title" = "Networking error";
+"alert.failure.networking.message" = "Check your url adress";
+"alert.failure.unknown.title" = "Ooops!";
+"alert.failure.unknown.message" = "Something went wrong";
