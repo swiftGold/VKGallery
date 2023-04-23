@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  VKGallery
+
+  Created by Сергей Золотухин on 23.04.2023.
+  
+*/
+
+"button.login" = "Enter with VK";
+"alert.success.savepicture.title" = "Saved!";
+"alert.success.savepicture.message" = "Your image has been saved to your photos.";
+"alert.failure.savepicture.title" = "Save error";
+"alert.failure.savepicture.message" = "Your image couldn't not be saved to your photos.";
