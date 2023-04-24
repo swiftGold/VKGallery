@@ -9,7 +9,6 @@ import UIKit
 import VK_ios_sdk
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
-
     var window: UIWindow?
     var authService: AuthService!
 
@@ -27,9 +26,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
         authService.delegate = self
         let moduleBuilder: ModuleBuilderProtocol = ModuleBuilder(router: router)
         let authViewController = moduleBuilder.buildAuthViewController()
-        router.setRoot(authViewController, isNavigationBarHidden: true)
-        window.makeKeyAndVisible()
-        self.window = window
+        let mainViewController = moduleBuilder.buildMainViewController()
+        
+        
+        VKSdk.isLoggedIn()
+        
+        VKSdk.wakeUpSession(["offline"]) { result, error in
+            switch result {
+            case .initialized:
+                router.setRoot(authViewController, isNavigationBarHidden: true)
+            case .authorized:
+                router.setRoot(mainViewController, isNavigationBarHidden: true)
+            case .unknown:
+                print("unknown")
+            case .pending:
+                print("pending")
+            case .external:
+                print("external")
+            case .safariInApp:
+                print("safariInApp")
+            case .webview:
+                print("webview")
+            case .error:
+                print("error")
+            @unknown default:
+                print("default")
+            }
+            window.makeKeyAndVisible()
+            self.window = window
+        }
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -39,21 +64,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
     }
     
     func authServiceShouldShow(_ viewController: UIViewController) {
-        print(#function)
         window?.rootViewController?.present(viewController, animated: true)
     }
     
     func authServiceSignIn() {
-        print(#function)
         let router = AppRouter(window: window!, navigationController: UINavigationController())
         let moduleBuilder: ModuleBuilderProtocol = ModuleBuilder(router: router)
         let mainViewController = moduleBuilder.buildMainViewController()
         router.setRoot(mainViewController, isNavigationBarHidden: true)
     }
     
-    func authServiceSignInDidFail() {
-        print(#function)
-    }
+    func authServiceSignInDidFail() {}
 }
-
-

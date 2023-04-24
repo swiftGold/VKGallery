@@ -115,7 +115,6 @@
 				1EF12D5129F406D8007F8C5B /* Alerts */,
 				1EF12D4729F2DFE2007F8C5B /* Extensions */,
 				1E01C12129F1706F00ACA4B7 /* AppRouter */,
-				1E01C10D29F1662900ACA4B7 /* Variables */,
 				1EC2281029F29A5000B3DB05 /* Managers */,
 				1EC2281129F29A5900B3DB05 /* Services */,
 				1E01C10A29F1653A00ACA4B7 /* Fonts */,
@@ -130,14 +129,6 @@
 				1E01C11729F16A3100ACA4B7 /* SFProText-Bold.ttf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		1E01C10D29F1662900ACA4B7 /* Variables */ = {
-			isa = PBXGroup;
-			children = (
-				1E01C10E29F1663900ACA4B7 /* Fonts.swift */,
-			);
-			path = Variables;
 			sourceTree = "<group>";
 		};
 		1E01C11929F16E5C00ACA4B7 /* Main */ = {
@@ -304,6 +295,7 @@
 			children = (
 				1EF12D6429F5097E007F8C5B /* Colors.swift */,
 				1EF12D6829F54B72007F8C5B /* AppError.swift */,
+				1E01C10E29F1663900ACA4B7 /* Fonts.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
