@@ -23,16 +23,16 @@ class DetailViewController: UIViewController {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "singlePlaceholder")
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: layout
         )
-        //TODO: - подсчитать размеры под все экраны
         layout.itemSize = CGSize(width: 54 , height: 54)
         layout.minimumLineSpacing = 2
         layout.minimumInteritemSpacing = 0
@@ -74,6 +74,7 @@ class DetailViewController: UIViewController {
 extension DetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.didTapCell(at: indexPath.item)
+        imageView.transform = CGAffineTransform.identity
     }
 }
 
@@ -148,8 +149,7 @@ private extension DetailViewController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-//            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: (UIScreen.main.bounds.height - 60 - imageView.heightAnchor / 2) / 2),
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 135),
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIScreen.main.bounds.height / 6.5),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 375),

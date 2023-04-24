@@ -21,7 +21,6 @@ final class AuthService: NSObject {
     override init() {
         vkSdk = VKSdk.initialize(withAppId: appId)
         super.init()
-        print("VKSdk.initialize")
         vkSdk.register(self)
         vkSdk.uiDelegate = self
     }
@@ -49,7 +48,6 @@ extension AuthService {
 // MARK: - VKSdkDelegate impl
 extension AuthService: VKSdkDelegate {
     func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
-        print(#function)
         if result.token != nil {
             delegate?.authServiceSignIn()
         } else {
@@ -58,7 +56,6 @@ extension AuthService: VKSdkDelegate {
     }
     
     func vkSdkUserAuthorizationFailed() {
-        print(#function)
         delegate?.authServiceSignInDidFail()
     }
 }
@@ -66,11 +63,9 @@ extension AuthService: VKSdkDelegate {
 // MARK: - VKSdkUIDelegate impl
 extension AuthService: VKSdkUIDelegate {
     func vkSdkShouldPresent(_ controller: UIViewController!) {
-        print(#function)
         delegate?.authServiceShouldShow(controller)
     }
     
     func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
-        print(#function)
     }
 }
