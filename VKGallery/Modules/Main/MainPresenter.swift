@@ -74,8 +74,9 @@ extension MainPresenter: MainPresenterProtocol {
         mapPhotosArray()
         if !detailViewsModels.isEmpty {
             let model = detailViewsModels[index]
-            let detailViewController = moduleBuilder.buildDetailViewController(model: model,
-                                                                               models: detailViewsModels
+            let detailViewController = moduleBuilder.buildDetailViewController(
+                model: model,
+                models: detailViewsModels
             )
             router.push(detailViewController, animated: true)
         }
@@ -88,20 +89,7 @@ private extension MainPresenter {
         Task {
             do {
                 let albumResponse = try await apiService.fetchPhotos()
-                let itemsArray: [PhotoModel] = albumResponse.response.items
-                viewModels = itemsArray.map { item in
-                    let id = item.id
-                    let date = item.date
-                    var url = ""
-                    item.sizes.forEach { unit in
-                        if unit.type == "q" {
-                            url = unit.url
-                        }
-                    }
-                    return PhotoViewModel(id: id,
-                                          date: date,
-                                          url: url)
-                }
+                mapInPhotoViewModel(with: albumResponse)
                 await MainActor.run {
                     viewController?.setupViewController(with: viewModels)
                 }
@@ -146,17 +134,32 @@ private extension MainPresenter {
         }
     }
     
-    
 // MARK: - Clear Cookies
     func removeCookies() {
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
         print("All cookies deleted")
-        
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
             records.forEach { record in
                 WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
                 print("Cookie: \(record) deleted")
             }
+        }
+    }
+    
+    func mapInPhotoViewModel(with model: AlbumResponseModel) {
+        let itemsArray: [PhotoModel] = model.response.items
+        viewModels = itemsArray.map { item in
+            let id = item.id
+            let date = item.date
+            var url = ""
+            item.sizes.forEach { unit in
+                if unit.type == "q" {
+                    url = unit.url
+                }
+            }
+            return PhotoViewModel(id: id,
+                                  date: date,
+                                  url: url)
         }
     }
 }

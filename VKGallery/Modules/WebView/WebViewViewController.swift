@@ -8,9 +8,7 @@
 import UIKit
 import WebKit
 
-protocol WebViewViewControllerProtocol: UIViewController {
-    
-}
+protocol WebViewViewControllerProtocol: UIViewController {}
 
 final class WebViewViewController: UIViewController {
 // MARK: - UI
@@ -24,9 +22,9 @@ final class WebViewViewController: UIViewController {
     }()
     
     private let webView = WKWebView()
-    private let alertManager = AlertManager()
     
 // MARK: - Variables
+    private let alertManager = AlertManager()
     var presenter: WebViewPresenterProtocol?
     
 // MARK: - life cycles
@@ -44,9 +42,7 @@ final class WebViewViewController: UIViewController {
 }
 
 // MARK: - WebViewViewControllerProtocol impl
-extension WebViewViewController: WebViewViewControllerProtocol {
-    
-}
+extension WebViewViewController: WebViewViewControllerProtocol {}
 
 // MARK: - WKNavigationDelegate
 extension WebViewViewController: WKNavigationDelegate {
@@ -67,12 +63,18 @@ extension WebViewViewController: WKNavigationDelegate {
         
         if let accsessToken = params["access_token"] {
             UserDefaults.standard.set(accsessToken, forKey: "access_token")
+        } else {
+            let message = "alert.tokenError.message".localized
+            self.callErrorAlert(message: message)
         }
         
         if let expiresIn = params["expires_in"] {
             guard let doubleDate = Double(expiresIn) else { return }
             let date = Date().addingTimeInterval(doubleDate)
             UserDefaults.standard.set(date, forKey: "expires_in")
+        }else {
+            let message = "alert.expiresError.message".localized
+            self.callErrorAlert(message: message)
         }
         decisionHandler(.cancel)
         

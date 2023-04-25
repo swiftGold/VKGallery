@@ -21,3 +21,9 @@
 "alert.exitFromAccount.title" = "Выйти из аккаунта";
 "alert.changeUser.title" = "Выйти и сменить пользователя";
 "alert.cancel.title" = "Отмена";
+"alert.ok.title" = "Да";
+"alert.close.title" = "Закрытие";
+"alert.close.message" = "Вы точно хотите закрыть?";
+"alert.CellError.message" = "Не получается получить ячейку";
+"alert.tokenError.message" = "Ошибка при получении токена";
+"alert.expiresError.message" = "Ошибка при получении оставшегося времени токена";

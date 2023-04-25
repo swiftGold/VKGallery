@@ -33,9 +33,7 @@ final class AuthPresenter {
 
 // MARK: - AuthPresenterProtocol impl
 extension AuthPresenter: AuthPresenterProtocol {
-    func viewDidLoad() {
-        
-    }
+    func viewDidLoad() {}
     
     func didTapVkButton() {
         if loginVKManager.isAuth() {

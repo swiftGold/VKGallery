@@ -80,9 +80,13 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     
     func buildWebViewViewController() -> WebViewViewController {
         let viewController = WebViewViewController()
+        let alertManager = AlertManager()
         let loginVkManager = LoginVKManager()
-        let presenter = WebViewPresenter(router: router, moduleBuilder: self, loginVKManager: loginVkManager)
-        
+        let presenter = WebViewPresenter(router: router,
+                                         moduleBuilder: self,
+                                         loginVKManager: loginVkManager,
+                                         alertManager: alertManager
+        )
         viewController.presenter = presenter
         presenter.viewController = viewController
         
