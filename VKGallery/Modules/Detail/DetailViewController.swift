@@ -17,7 +17,7 @@ protocol DetailViewControllerProtocol: UIViewController {
 }
 
 class DetailViewController: UIViewController {
-    // MARK: - UI
+// MARK: - UI
     private lazy var barButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(didTapBarButton))
     
     private let imageView: UIImageView = {
@@ -27,7 +27,7 @@ class DetailViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero,
@@ -50,19 +50,19 @@ class DetailViewController: UIViewController {
         return collectionView
     }()
     
-    // MARK: - Variables
+// MARK: - Variables
     var presenter: DetailPresenterProtocol?
     private var viewModels: [DetailPhotoViewModel] = []
     private var isPlaceholder = false
     
-    // MARK: - life cycles
+// MARK: - life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
         setupNavBar()
     }
     
-    // MARK: - Objc methods
+// MARK: - Objc methods
     @objc
     private func didTapBarButton() {
         let image = imageView.image

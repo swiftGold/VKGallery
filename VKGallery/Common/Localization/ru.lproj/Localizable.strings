@@ -18,3 +18,6 @@
 "alert.failure.networking.message" = "Проверьте правильность url адреса";
 "alert.failure.unknown.title" = "Упссс!";
 "alert.failure.unknown.message" = "Что-то пошло не так";
+"alert.exitFromAccount.title" = "Выйти из аккаунта";
+"alert.changeUser.title" = "Выйти и сменить пользователя";
+"alert.cancel.title" = "Отмена";

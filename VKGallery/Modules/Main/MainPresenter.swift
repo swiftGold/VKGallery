@@ -5,7 +5,8 @@
 //  Created by Сергей Золотухин on 20.04.2023.
 //
 
-import VK_ios_sdk
+import Foundation
+import WebKit
 
 protocol MainPresenterProtocol {
     func viewDidLoad()
@@ -24,28 +25,44 @@ final class MainPresenter {
     private let moduleBuilder: ModuleBuilderProtocol
     private let apiService: APIServiceProtocol
     private let alertManager: AlertManagerProtocol
+    private let loginVkManager: LoginVKManagerProtocol
     
     init(
         router: Router,
         moduleBuilder: ModuleBuilderProtocol,
         apiService: APIServiceProtocol,
         calendarManager: CalendarManagerProtocol,
-        alertManager: AlertManagerProtocol
+        alertManager: AlertManagerProtocol,
+        loginVkManager: LoginVKManagerProtocol
     ) {
         self.router = router
         self.moduleBuilder = moduleBuilder
         self.apiService = apiService
         self.calendarManager = calendarManager
         self.alertManager = alertManager
+        self.loginVkManager = loginVkManager
     }
 }
 
 // MARK: - MainPresenterProtocol
 extension MainPresenter: MainPresenterProtocol {
     func didTapLogOutButton() {
-        VKSdk.forceLogout()
-        let authViewController = moduleBuilder.buildAuthViewController()
-        router.push(authViewController, animated: true)
+        let alert = UIAlertController(
+            title: "navbar.button.exit".localized,
+            message: "",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "alert.exitFromAccount.title".localized, style: .default) { _ in
+            self.logoutFromVk()
+        })
+        alert.addAction(UIAlertAction(title: "alert.changeUser.title".localized, style: .default) { _ in
+            self.removeCookies()
+            self.logoutFromVk()
+        })
+        alert.addAction(UIAlertAction(title: "alert.cancel.title".localized, style: .destructive) { _ in
+            print("cancel")
+        })
+        viewController?.present(alert, animated: true)
     }
     
     func viewDidLoad() {
@@ -111,12 +128,35 @@ private extension MainPresenter {
     func mapPhotosArray() {
         detailViewsModels = viewModels.map { item in
             let id = item.id
-            let date = calendarManager.fetchDateFromTimeStamp(ti: item.date)
+            let date = calendarManager.fetchStringFromTimeStamp(ti: item.date)
             let url = item.url
             return DetailPhotoViewModel(id: id,
                                         date: date,
                                         url: url
             )
+        }
+    }
+    
+// MARK: - delete token and expires time from UserDefaults
+    func logoutFromVk() {
+        loginVkManager.logoutFromVK { [weak self] in
+            guard let self = self else { return }
+            let authViewController = self.moduleBuilder.buildAuthViewController()
+            self.router.push(authViewController, animated: true)
+        }
+    }
+    
+    
+// MARK: - Clear Cookies
+    func removeCookies() {
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        print("All cookies deleted")
+        
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+                print("Cookie: \(record) deleted")
+            }
         }
     }
 }

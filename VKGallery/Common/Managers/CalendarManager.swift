@@ -8,7 +8,8 @@
 import UIKit
 
 protocol CalendarManagerProtocol {
-    func fetchDateFromTimeStamp(ti: TimeInterval) -> String
+    func fetchStringFromTimeStamp(ti: TimeInterval) -> String
+    func fetchDateFromTimeStamp(ti: TimeInterval) -> Date
 }
 
 final class CalendarManager {
@@ -17,12 +18,16 @@ final class CalendarManager {
 }
 
 extension CalendarManager: CalendarManagerProtocol {
-    //Получаем строковое значение даты из timeStamp с учетом часового пояса
-    func fetchDateFromTimeStamp(ti: TimeInterval) -> String {
+    func fetchStringFromTimeStamp(ti: TimeInterval) -> String {
         let dateFromUnix = Date(timeIntervalSince1970: ti)
         dateFormatter.dateFormat = "dd MMMM YYYY"
         dateFormatter.timeZone = .current
         let dateString = dateFormatter.string(from: dateFromUnix)
         return dateString
+    }
+    
+    func fetchDateFromTimeStamp(ti: TimeInterval) -> Date {
+        let date = Date(timeIntervalSince1970: ti)
+        return date
     }
 }
