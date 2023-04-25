@@ -30,19 +30,27 @@ What can you find in this app?
 ![Screenshot 2023-04-25 at 17 45 21](https://user-images.githubusercontent.com/112863601/234314204-74b5a284-628f-4035-92e6-078493228dc0.png)
 ![Screenshot 2023-04-25 at 18 00 44](https://user-images.githubusercontent.com/112863601/234318991-5dfea637-690d-4fcb-a546-ec3283482797.png)
 
-7. Strong men
+7. Bros from your ghetto
+
+![Screenshot 2023-04-25 at 18 09 31](https://user-images.githubusercontent.com/112863601/234321877-cbff59d2-4cb7-4312-9b0b-904b6734eb2f.png)
+
+8. Strong man
 
 ![Screenshot 2023-04-25 at 17 49 46](https://user-images.githubusercontent.com/112863601/234316143-919d708e-ce29-4184-aed2-3c7675af6ac2.png)
 
-8. Star wars
+9. Star wars
 
 ![Screenshot 2023-04-25 at 17 49 52](https://user-images.githubusercontent.com/112863601/234316204-08573d55-9492-4840-a6fd-0b44daa2aa00.png)
 ![Screenshot 2023-04-25 at 17 49 58](https://user-images.githubusercontent.com/112863601/234316237-615e6284-bb7e-4ab5-91df-421b92551da5.png)
 
-9. Sharing photos with friends and saving into the gallery
+10. Sharing photos with friends and saving into the gallery
 
 ![Screenshot 2023-04-25 at 17 50 08](https://user-images.githubusercontent.com/112863601/234316291-52f41fb6-e86d-46d7-82cd-f4808fe5a37f.png)
 
+11. Localization rus / eng
+
+![Screenshot 2023-04-25 at 18 12 59](https://user-images.githubusercontent.com/112863601/234322710-8ed5f1af-4b2c-4e6f-904a-eec7e7829c6f.png)
+![Screenshot 2023-04-25 at 18 13 26](https://user-images.githubusercontent.com/112863601/234322727-b8311510-58c9-4f15-82b8-0ac99a38434f.png)
 
 
 
@@ -50,6 +58,8 @@ What can you find in this app?
 
 
 
+
+Декомпозировать задание, разбив на подзадачи:
 
 Как я хотел, что бы это было 😅:
 1. Верстка дизайна - 4 часа
