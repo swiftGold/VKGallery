@@ -21,3 +21,9 @@
 "alert.exitFromAccount.title" = "Log out";
 "alert.changeUser.title" = "Log out and change user";
 "alert.cancel.title" = "Cancel";
+"alert.ok.title" = "OK";
+"alert.close.title" = "Close";
+"alert.close.message" = "Are you sure you want to close?";
+"alert.CellError.message" = "Can't recieve Cell";
+"alert.tokenError.message" = "error with recieve token";
+"alert.expiresError.message" = "error with recieve expires time";
