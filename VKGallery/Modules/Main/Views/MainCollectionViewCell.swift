@@ -7,8 +7,9 @@
 
 import UIKit
 
+// MARK: - MainCollectionViewCell
 final class MainCollectionViewCell: UICollectionViewCell {
-    
+// MARK: - UI
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +26,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+// MARK: - Methods
     func configureCell(with model: PhotoViewModel) {
         imageView.loadImage(from: model.url)
     }
@@ -36,7 +37,6 @@ final class MainCollectionViewCell: UICollectionViewCell {
 }
 
 // MARK: - Private methods
-
 private extension MainCollectionViewCell {
     func setupCell() {
         addSubviews()

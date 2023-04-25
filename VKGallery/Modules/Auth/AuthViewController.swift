@@ -8,9 +8,7 @@
 import UIKit
 
 // MARK: - AuthViewControllerProtocol
-protocol AuthViewControllerProtocol: AnyObject {
-    
-}
+protocol AuthViewControllerProtocol: UIViewController {}
 
 class AuthViewController: UIViewController {
 // MARK: - UI
@@ -38,18 +36,18 @@ class AuthViewController: UIViewController {
     
 // MARK: - Variables
     var presenter: AuthPresenterProtocol?
-
+    
 // MARK: - life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
-        
+    
 // MARK: - objc methods
     @objc
     private func didTapVkButton() {
@@ -58,9 +56,7 @@ class AuthViewController: UIViewController {
 }
 
 // MARK: - AuthViewControllerProtocol impl
-extension AuthViewController: AuthViewControllerProtocol {
-    
-}
+extension AuthViewController: AuthViewControllerProtocol {}
 
 // MARK: - private methods
 private extension AuthViewController {

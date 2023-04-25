@@ -14,6 +14,7 @@ protocol Router {
     func popToRoot(animated: Bool)
 }
 
+//MARK: - AppRouter
 final class AppRouter {
     private let window: UIWindow
     private var navigationController: UINavigationController
@@ -27,6 +28,7 @@ final class AppRouter {
     }
 }
 
+// MARK: - Router impl
 extension AppRouter: Router {
     func setRoot(_ viewController: UIViewController, isNavigationBarHidden: Bool) {
         navigationController.isNavigationBarHidden = isNavigationBarHidden

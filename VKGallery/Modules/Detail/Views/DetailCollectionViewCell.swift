@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - DetailCollectionViewCell
 final class DetailCollectionViewCell: UICollectionViewCell {
     
     private let imageView: UIImageView = {
@@ -14,7 +15,7 @@ final class DetailCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-            
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCell()
@@ -23,7 +24,8 @@ final class DetailCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+// MARK: - Methods
     func configureCell(with model: DetailPhotoViewModel) {
         imageView.loadImage(from: model.url)
     }
@@ -34,7 +36,6 @@ final class DetailCollectionViewCell: UICollectionViewCell {
 }
 
 // MARK: - Private methods
-
 private extension DetailCollectionViewCell {
     func setupCell() {
         addSubviews()

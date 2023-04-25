@@ -26,7 +26,6 @@ class MainViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: layout
         )
-        //TODO: - подсчитать размеры под все экраны
         layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 4) / 2 ,
                                  height: 214
         )
@@ -46,19 +45,19 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     
-// MARK: - Variables
+    // MARK: - Variables
     var presenter: MainPresenterProtocol?
     private var viewModels: [PhotoViewModel] = []
     private var isPlaceholder = false
-
-// MARK: - life cycles
+    
+    // MARK: - life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
         setupNavBar()
     }
     
-// MARK: - Objc methods
+    // MARK: - Objc methods
     @objc
     private func didTapBarButton() {
         presenter?.didTapLogOutButton()
@@ -109,6 +108,7 @@ extension MainViewController: MainViewControllerProtocol {
 private extension MainViewController {
     func setupNavBar() {
         title = "MobileUp Gallery"
+        navigationController?.isNavigationBarHidden = false
         navigationItem.rightBarButtonItem = barButtonItem
         navigationItem.hidesBackButton = true
         navigationController?.navigationBar.tintColor = UIColor(named: Colors.black)

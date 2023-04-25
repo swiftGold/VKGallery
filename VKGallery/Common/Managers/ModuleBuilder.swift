@@ -9,6 +9,7 @@ protocol ModuleBuilderProtocol {
     func buildAuthViewController() -> AuthViewController
     func buildMainViewController() -> MainViewController
     func buildDetailViewController(model: DetailPhotoViewModel, models: [DetailPhotoViewModel]) -> DetailViewController
+    func buildWebViewViewController() -> WebViewViewController
 }
 
 final class ModuleBuilder {
@@ -29,7 +30,11 @@ final class ModuleBuilder {
 extension ModuleBuilder: ModuleBuilderProtocol {
     func buildAuthViewController() -> AuthViewController {
         let viewController = AuthViewController()
-        let presenter = AuthPresenter(router: router, moduleBuilder: self)
+        let loginVKManager = LoginVKManager()
+        let presenter = AuthPresenter(router: router,
+                                      moduleBuilder: self,
+                                      loginVKManager: loginVKManager
+        )
         viewController.presenter = presenter
         presenter.viewController = viewController
         return viewController
@@ -37,6 +42,7 @@ extension ModuleBuilder: ModuleBuilderProtocol {
     
     func buildMainViewController() -> MainViewController {
         let viewController = MainViewController()
+        let loginVkManager = LoginVKManager()
         let alertManager = AlertManager()
         let calendarManager = CalendarManager()
         let jsonService = JSONDecoderManager()
@@ -46,7 +52,8 @@ extension ModuleBuilder: ModuleBuilderProtocol {
                                       moduleBuilder: self,
                                       apiService: apiService,
                                       calendarManager: calendarManager,
-                                      alertManager: alertManager
+                                      alertManager: alertManager,
+                                      loginVkManager: loginVkManager
         )
         viewController.presenter = presenter
         presenter.viewController = viewController
@@ -68,6 +75,17 @@ extension ModuleBuilder: ModuleBuilderProtocol {
         )
         viewController.presenter = presenter
         presenter.viewController = viewController
+        return viewController
+    }
+    
+    func buildWebViewViewController() -> WebViewViewController {
+        let viewController = WebViewViewController()
+        let loginVkManager = LoginVKManager()
+        let presenter = WebViewPresenter(router: router, moduleBuilder: self, loginVKManager: loginVkManager)
+        
+        viewController.presenter = presenter
+        presenter.viewController = viewController
+        
         return viewController
     }
 }
