@@ -1,19 +1,13 @@
-
 App for work with VK.com photo albums
 
-Screenshot 2023-04-25 at 17 50 34
+![Screenshot 2023-04-25 at 17 29 35](https://user-images.githubusercontent.com/112863601/236776949-f7aa699b-4584-408d-a930-efb84edbe611.png)
 
-Stylish design and Dark / Light Themes
-Screenshot 2023-04-25 at 17 49 31 Screenshot 2023-04-25 at 17 57 38
+![Screenshot 2023-04-25 at 17 29 43](https://user-images.githubusercontent.com/112863601/236776992-8b0c0367-b192-4b3d-bff7-ad393bbab5e3.png)
 
-VK.com authorization
-Screenshot 2023-04-25 at 17 55 44
+![Screenshot 2023-04-25 at 17 32 03](https://user-images.githubusercontent.com/112863601/236777169-864912e7-926a-4e6e-b628-0c010d30bdf9.png)
 
-Photo gallery from VK album
-Screenshot 2023-04-25 at 17 49 09
+![Screenshot 2023-04-25 at 17 30 30](https://user-images.githubusercontent.com/112863601/236777052-b7183faa-135f-4d70-b1b8-12c7310b2ab5.png)
 
-Sharing photos with friends and saving into the gallery
-Screenshot 2023-04-25 at 17 50 08
+![Screenshot 2023-04-25 at 17 45 21](https://user-images.githubusercontent.com/112863601/236777205-415c9e79-658d-4e41-ad40-51b8bde4a04a.png)
 
-Localization rus / eng
-Screenshot 2023-04-25 at 18 12 59 Screenshot 2023-04-25 at 18 13 26
+![Screenshot 2023-04-25 at 17 46 24](https://user-images.githubusercontent.com/112863601/236777274-af09ecc7-f462-4b0d-860e-73e0ff4391dd.png)
